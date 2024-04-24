@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsvi5j8p5mdwa"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_15dcp"]
+[ext_resource type="Texture2D" uid="uid://bwxul68daa26n" path="res://art/Pika-inicial.png" id="2_atilb"]
+[ext_resource type="Texture2D" uid="uid://c7uafefar7kix" path="res://art/D8ej6W.png" id="3_535rp"]
+[ext_resource type="Texture2D" uid="uid://c0jwsjlpxr5bo" path="res://art/R.png" id="4_s42xs"]
+[ext_resource type="Texture2D" uid="uid://b7ml7ykquc86b" path="res://art/imagenes-anime-pikachu.png" id="5_smbpj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_imwb5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_atilb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_535rp")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_smbpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_s42xs")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n1ils"]
+radius = 29.0
+height = 72.0
+
+[node name="Player" type="Area2D"]
+position = Vector2(245, 339)
+script = ExtResource("1_15dcp")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 2.5)
+scale = Vector2(0.0311891, 0.0624315)
+sprite_frames = SubResource("SpriteFrames_imwb5")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_n1ils")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
